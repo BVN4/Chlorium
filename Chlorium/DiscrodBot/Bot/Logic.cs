@@ -20,14 +20,8 @@ namespace DiscrodBot
         }
         public static bool containsEmoji(string content,IEnumerable<string> tags)
         {
-            string withnoEmotes = Regex.Replace(content, @"\p{Cs}","");
-            foreach (var item in tags)
-            {
-                withnoEmotes=withnoEmotes.Replace(item, "");
-                withnoEmotes= withnoEmotes.Trim();
-            }
-                
-            return withnoEmotes.Trim().Length == 0;
+            var reg = Regex.Match(content, "^(\s*(<:[^:]+:[0-9]+>|\p{Cs})\s*)+$");
+            return match.Success;
         }
 
 
